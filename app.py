@@ -1017,6 +1017,9 @@ st.divider()
 st.markdown(
     "<small>**Data:** EM-DAT (CRED, UCLouvain) · World Bank GDP · Natural Earth · "
     "**Author:** Sheila Alonso · "
-    "[GitHub](https://github.com/AlonsoSheila)</small>",
+    "[GitHub](https://github.com/AlonsoSheila/flood-risk-europe) · "
+    "[Notebook](https://github.com/AlonsoSheila/flood-risk-europe/blob/main/analysis.ipynb) · "
+    "[Executive Report](https://github.com/AlonsoSheila/flood-risk-europe/blob/main/docs/executive_report_en.pdf)"
+    "</small>",
     unsafe_allow_html=True,
 )
