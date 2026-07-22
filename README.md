@@ -5,7 +5,7 @@
 
 ## 🌊 Live Dashboard
 
-**[View the interactive Streamlit dashboard →](#)** *(link added once deployed)*
+**[View the interactive Streamlit dashboard →](https://flood-risk-europe.streamlit.app)**
 
 The dashboard is the main deliverable of this project — nine tabs covering economic losses, insurance gap, mortality, vulnerability profiles, flood types and extreme events, all filterable live by country, flood type and year. The notebook and this README are the technical detail behind it.
 
@@ -108,7 +108,7 @@ Methodology: Exploratory Data Analysis (EDA), Climate Risk Assessment, Spatial A
 ## How to Run
 
 ### Option A — Just explore the dashboard
-No setup needed: **[open the live dashboard](#)** *(link added once deployed)*.
+No setup needed: **[open the live dashboard](https://flood-risk-europe.streamlit.app)**.
 
 ### Option B — Run the dashboard locally
 1. Clone the repository
