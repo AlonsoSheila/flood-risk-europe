@@ -544,7 +544,7 @@ with tabs[3]:
                     f'for any event): <b>{", ".join(missing)}</b>.</p>',
                     unsafe_allow_html=True)
 
-        col_a, col_b = st.columns([3, 2])
+        col_a, col_b = st.columns([1, 1])
         with col_a:
             # Mismo orden que la tabla de la derecha (daño total, mayor arriba),
             # así las barras y las filas de la tabla se corresponden 1 a 1.
@@ -572,8 +572,15 @@ with tabs[3]:
         with col_b:
             st.markdown("**Coverage rate by country**")
             tbl = gap_data[["total_damage_adj", "insured_damage_adj", "insurance_gap", "coverage_pct"]].copy()
-            tbl.columns = ["Total (B USD)", "Insured (B USD)", "Gap (B USD)", "Coverage %"]
-            st.dataframe(tbl.round(1), use_container_width=True)
+            tbl.columns = ["Total ($B)", "Insured ($B)", "Gap ($B)", "Coverage %"]
+            st.dataframe(
+                tbl.round(1), use_container_width=True,
+                column_config={
+                    "Total ($B)": st.column_config.NumberColumn(width="small"),
+                    "Insured ($B)": st.column_config.NumberColumn(width="small"),
+                    "Gap ($B)": st.column_config.NumberColumn(width="small"),
+                    "Coverage %": st.column_config.NumberColumn(width="small"),
+                })
 
 # ─── TAB 5: MORTALITY & POPULATION ────────────────────────────────────────────
 with tabs[4]:
