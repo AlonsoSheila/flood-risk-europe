@@ -1,0 +1,24 @@
+.ipynb_checkpoints/
+ne_110m_admin_0_countries/
+ne_110m_admin_0_countries.zip
+Project_Study_Guide.html
+Project_Study_Guide_ES.html
+flood_type_descriptions.docx
+
+# EM-DAT terms of use prohibit redistributing the database publicly.
+# Each user must download their own copy from public.emdat.be after
+# registering and accepting EM-DAT's terms — see README for instructions.
+data/emdat_floods_europe.xlsx
+
+# Pre-aggregated stats derived from EM-DAT, used to power the deployed
+# dashboard. Kept out of the public repo too (belt-and-suspenders, even
+# though aggregated data carries much lower redistribution risk than the
+# raw file) — the deployed app fetches these from a private URL configured
+# in Streamlit Cloud secrets. See README for how to (re)generate them
+# locally from your own EM-DAT copy.
+data/flood_agg.csv
+data/top_events.csv
+
+# Personal interview prep docs — kept locally, not published
+docs/interview_study_guide*
+docs/Project_Study_Guide*
