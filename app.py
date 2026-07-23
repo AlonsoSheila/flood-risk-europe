@@ -266,8 +266,8 @@ st.divider()
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
 tabs = st.tabs([
-    "🗺️ Map", "💶 Economic Losses", "📈 Trends", "🛡️ Insurance Gap",
-    "💀 Mortality & Population", "⚠️ Vulnerability", "🌊 Flood Types", "🔥 Extreme Events",
+    "🗺️ Map", "💶 Losses", "📈 Trends", "🛡️ Insurance",
+    "💀 Mortality", "⚠️ Vulnerability", "🌊 Flood Types", "🔥 Extremes",
     "📋 Key Findings",
 ])
 
