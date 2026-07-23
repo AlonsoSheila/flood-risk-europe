@@ -1,7 +1,7 @@
 # Flood Risk in Europe
 ### Economic Losses, Mortality and Physical Climate Risk Insights (2000-2026)
 
-![Flood Risk Map](images/09_flood_damage_map.png)
+![Flood Risk Map](images/11_flood_damage_map.png)
 
 ## 🌊 Live Dashboard
 
