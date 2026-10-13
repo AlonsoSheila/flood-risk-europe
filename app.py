@@ -43,7 +43,7 @@ st.markdown("""
 COUNTRY_COLORS = {
     "Germany": "#2a78d6", "UK": "#eda100", "Italy": "#1baf7a",
     "Spain": "#e34948", "France": "#7c5cbf", "Russia": "#e87ba4",
-    "Romania": "#eb6834", "Austria": "#1baf7a", "Czechia": "#4a3aa7",
+    "Romania": "#eb6834", "Austria": "#0b7285", "Czechia": "#4a3aa7",
     "Poland": "#008300", "Switzerland": "#BA7517", "Slovenia": "#d03b3b",
     "Serbia": "#185FA5", "Belgium": "#639922", "Portugal": "#e05252",
     "Bosnia": "#fab219", "Bulgaria": "#3987e5", "Greece": "#d55181",
@@ -649,8 +649,8 @@ with tabs[5]:
     vuln = df_f.groupby("country").agg(
         total_damage_b=("total_damage_adj", lambda x: x.sum(min_count=1) / 1e6),
         total_deaths=("total_deaths", "sum"),
-        n_damage_events=("total_damage_adj", lambda x: x.notna().sum()),
-        n_death_events=("total_deaths", lambda x: x.notna().sum()),
+        n_damage_events=("n_damage_events", "sum"),
+        n_death_events=("n_death_events", "sum"),
     ).reset_index()
 
     # Remove rows where deaths or damage are 0, NaN, or negative (breaks log scale)
@@ -693,6 +693,26 @@ with tabs[5]:
             marker=dict(size=14, line=dict(width=0.5, color="gray")),
             hovertemplate="<b>%{text}</b><br>Damage: $%{x:.1f}B<br>Deaths: %{y:.0f}<extra></extra>",
         )
+        # Posición de etiqueta: se agrupan los países con daño parecido (cercanos
+        # en X). Dentro de cada grupo, ordenados de mayor a menor muertes, las
+        # etiquetas se reparten para que no se pisen: 2 países -> arriba/abajo;
+        # 3 o más -> arriba, izquierda, derecha, abajo.
+        _v = vuln_f.assign(_lx=np.log10(vuln_f["total_damage_b"])).sort_values("_lx")
+        _pos, _grp, _prev = {}, [], None
+        def _flush(g):
+            g = sorted(g, key=lambda r: -r[1])
+            cyc = (["top center", "bottom center"] if len(g) == 2
+                   else ["top center", "middle left", "middle right", "bottom center"])
+            for i, (c, _) in enumerate(g):
+                _pos[c] = cyc[i % len(cyc)] if len(g) > 1 else "top center"
+        for _, r in _v.iterrows():
+            if _prev is not None and r["_lx"] - _prev > 0.1:
+                _flush(_grp); _grp = []
+            _grp.append((r["country"], r["total_deaths"])); _prev = r["_lx"]
+        if _grp:
+            _flush(_grp)
+        for _tr in fig_vuln.data:
+            _tr.textposition = _pos.get(_tr.name, "top center")
         # Median lines only when 5+ countries
         if len(vuln_f) >= 5:
             fig_vuln.add_vline(x=med_dmg, line_dash="dot", line_color="gray",
